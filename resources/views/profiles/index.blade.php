@@ -4,22 +4,32 @@
 <div class="container">
     <div class="row">
         <div class="col-3 p-5">
-            <img src="https://yt3.ggpht.com/a/AGF-l7_sGUrG_alh-mdTIDmdcaw1GanuPL2PxVajjQ=s900-c-k-c0xffffffff-no-rj-mo" alt="Une image" style="height:168px; width:168px;" class="rounded-circle">
+        <img src="/storage/{{ $user->profile->image }}" alt="Une image" class="rounded-circle w-100">
         </div>
 
         <div class="col-9 pt-5"> 
             <div class="d-flex justify-content-between align-items-baseline">
                 <h1>{{ $user->username }}</h1>
-                <a href="/p/create">Add New Post</a>
+
+                @can('update', $user->profile)
+                    <a href="/p/create">Add New Post</a>
+                @endcan
+                
                 
             </div>
-        <a href="/profile/{{ $user->id }}">Edit Profile</a>
+
+            @can('update', $user->profile)
+                <a href="/profile/{{ $user->id }}/edit">Edit Profile</a>
+            @endcan
+
             <div class="d-flex">
+
             <div class="pr-5"><strong>{{ $user->posts->count() }}</strong> posts</div>
                 <div class="pr-5"><strong>28k</strong> followers</div>
                 <div class="pr-5"><strong>500</strong> following</div>
             </div>
         <div class="pt-4 font-weight-bold">{{ $user->profile->title }}</div>
+
         <div>{{ $user->profile->description }}</div>
             <div><a href="#">{{ $user->profile->url }}</a></div>
         </div>
