@@ -2,7 +2,10 @@
 
 @section('content')
 <div class="container">
-    <form action="">
+    <form action="/p" enctype="multipart/form-data" method="post">
+
+        @csrf
+
         <div class="row">
             <div class="col-8 offset-2">
 
@@ -17,7 +20,7 @@
                             type="caption" 
                             class="form-control 
                             {{ $errors->has('caption') ? 'is-invalid' : '' }}"
-                            caption="caption" 
+                            name="caption"
                             value="{{ old('caption') }}" autocomplete="caption" autofocus>
     
                     @error('caption')
@@ -33,7 +36,6 @@
                     <input type="file" class="form-control-file" id="image" name="image">
 
                     @error('image')
-                        <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
